@@ -1,6 +1,6 @@
 // ============================================================
 // HKITBOT - MINEFLAYER KIT BOT (LIMBO / BOT-FILTER FIX)
-// Minecraft 1.20.1 - GitHub Actions / Hosting Ready
+// Minecraft 1.20.1 - Node.js 24 Ready
 // ============================================================
 
 const mineflayer = require('mineflayer');
@@ -9,7 +9,7 @@ const { pathfinder } = require('mineflayer-pathfinder');
 const readline = require('readline');
 const http = require('http');
 
-// GitHub Actions Keep-Alive HTTP Sunucusu
+// GitHub Actions Process Keep-Alive HTTP Sunucusu
 const PORT = process.env.PORT || 8080;
 http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
