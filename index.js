@@ -1,12 +1,22 @@
 // ============================================================
 // HKITBOT - MINEFLAYER KIT BOT (LIMBO / BOT-FILTER FIX)
-// Minecraft 1.20.1
+// Minecraft 1.20.1 - GitHub Actions / Hosting Ready
 // ============================================================
 
 const mineflayer = require('mineflayer');
 const autoAuth = require('mineflayer-auto-auth');
 const { pathfinder } = require('mineflayer-pathfinder');
 const readline = require('readline');
+const http = require('http');
+
+// GitHub Actions Keep-Alive HTTP Sunucusu
+const PORT = process.env.PORT || 8080;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('HKITBOT ACTIVE\n');
+}).listen(PORT, () => {
+  console.log(`[Sunucu] Health Check dinleniyor: Port ${PORT}`);
+});
 
 const CONFIG = {
   host: 'mc.anarcion.com',
@@ -182,12 +192,10 @@ function createMyBot() {
 
   globalBot = bot;
 
-  // LIMBO FILTER BYPASS - Henüz oyuna girmeden gelen paket seviyesindeki mesajlar
   bot.on('message', (jsonMsg) => {
     const text = jsonMsg.toString();
     console.log(`[SUNUCU MESAJI]: ${text}`);
 
-    // Limbo/BotFilter kayıt ve giriş komutu yakalama
     if (text.includes('/register') || text.includes('register')) {
       bot.chat(`/register ${CONFIG.password} ${CONFIG.password}`);
     } else if (text.includes('/login') || text.includes('login')) {
